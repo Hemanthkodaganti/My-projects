@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#########################
+#
+#input : This script will be reporting the aws resource usage
+#
+#author : Hemanthkodaganti
+#
+#version : v1
+#########################
+set -x debug
+set -e dont execute when there is an error
+set -o pipefail
+
+# list of aws ec2 instances
+echo "print the list of aws ec2 instances"
+
+aws ec2 describe-instances | jq '.Reservations[].Istances[].Intanceid'
+
+#list of aws s3 buckets
+echo "print the list of aws s3 buckets"
+
+aws s3 ls > resourceTracker
+
+#list of aws iam-users
+echo "print the list of aws iam-users"
